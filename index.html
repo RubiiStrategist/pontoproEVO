@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PontoPro — Empresa (Loja 1/2 • Banco mensal • Relatório timbrado)</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div class="wrap no-print" id="app" data-theme="dark">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>PontoPro <span class="pill">EMPRESA</span></h1>
+          <p>Loja 1/2 • Mensal + Semanal • Banco mensal • Relatório timbrado</p>
+        </div>
+      </div>
+      <div class="nav">
+        <button class="btn ghost" id="btnPageMes">📅 Mês</button>
+        <button class="btn ghost" id="btnPageSemana">🗓️ Semana</button>
+        <button class="btn ghost" id="btnPageFuncionarios">👥 Funcionários</button>
+        <button class="btn ghost" id="btnPageRelatorio">🧾 Relatório</button>
+        <button class="btn" id="btnTheme">🌗 Tema</button>
+        <button class="btn danger" id="btnLogout">🚪 Sair</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card" id="page"></div>
+
+      <div class="card" id="sidebar">
+        <h2>Resumo + Config</h2>
+        <p class="sub">Semana = Seg→Dom. Banco de horas é mensal. Por hora não fica negativo.</p>
+
+        <div class="row">
+          <div class="field" style="flex:1 1 240px;">
+            <label>Funcionário selecionado</label>
+            <select id="employeeSelect"></select>
+          </div>
+          <button class="btn primary" id="btnNewEmployee">➕ Novo</button>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Mês atual</label>
+            <input id="monthPick" type="month">
+          </div>
+          <div class="field">
+            <label>Semana (segunda)</label>
+            <input id="weekPick" type="date">
+          </div>
+        </div>
+
+        <div class="kpis" id="kpis"></div>
+
+        <div class="sep"></div>
+
+        <div class="row">
+          <button class="btn good" id="btnExportCSV">⬇️ CSV</button>
+          <button class="btn" id="btnExportJSON">⬇️ JSON</button>
+        </div>
+
+        <div class="sep"></div>
+
+        <p class="sub">
+          Regras: Falta desconta jornada do funcionário (ex: <span class="mono">08:00</span>) • Atestado conta jornada cheia • Por hora: extras já estão dentro.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="modal" id="loginModal">
+    <div class="modalCard">
+      <h3>Entrar no PontoPro</h3>
+      <p>Login por pessoa (Supabase Auth). Todo mundo vê tudo e pode lançar/editar.</p>
+      <div class="row">
+        <div class="field" style="flex:1 1 240px;">
+          <label>E-mail</label>
+          <input id="loginEmail" type="email" placeholder="seu@email.com" autocomplete="username">
+        </div>
+        <div class="field" style="flex:1 1 220px;">
+          <label>Senha</label>
+          <input id="loginPass" type="password" placeholder="••••••••" autocomplete="current-password">
+        </div>
+      </div>
+      <div class="row spread" style="margin-top:10px;">
+        <span class="pill" id="loginStatus">Aguardando login…</span>
+        <div class="row">
+          <button class="btn" id="btnLogin">🔐 Entrar</button>
+        </div>
+      </div>
+      <div class="sep"></div>
+      <p class="sub">Se der erro de chave: use a <b>anon public key</b> do Supabase em Project Settings → API.</p>
+    </div>
+  </div>
+
+  <div id="printArea" class="print-card" style="display:none"></div>
+
+  <!-- Supabase (global window.supabase) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- App (ES Modules) -->
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
